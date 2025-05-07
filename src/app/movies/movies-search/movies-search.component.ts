@@ -35,7 +35,22 @@ export class MoviesSearchComponent implements OnInit {
     if(values.title){
       this.movies= this.movies.filter(movie => movie.title.indexOf(values.title) !== -1);
       //filtracije filmove preko DTO data to object, kroz filter(bez baze) da se poklapa sa titlom(nazivom)
+
     }
+
+    if(values.genreId !== 0){
+      this.movies= this.movies.filter(movie=> movie.genres.indexOf(values.genreId) !== -1);
+    }
+
+    if(values.upcomingRelease ){
+      this.movies= this.movies.filter(movie => movie.upcomingRelease);
+    }
+
+    if(values.inTheaters){
+      this.movies= this.movies.filter(movie=> movie.inTheaters);
+    }
+
+
   }
 
   private formBuilder = inject (FormBuilder);
@@ -43,7 +58,7 @@ export class MoviesSearchComponent implements OnInit {
   form = this.formBuilder.group({
     title: '',
     genreId: 0,
-    upcomingReleases:false,
+    upcomingRelease:false,
     inTheaters: false
 
   })
@@ -120,7 +135,7 @@ export class MoviesSearchComponent implements OnInit {
     this.form.patchValue({
       title: '',
       genreId: 0,
-      upcomingReleases:false,
+      upcomingRelease:false,
       inTheaters: false
   
     })

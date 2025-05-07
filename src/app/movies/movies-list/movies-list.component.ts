@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-movies-list',
   standalone: true,
-  imports: [DatePipe, UpperCasePipe, CurrencyPipe, NgFor, NgOptimizedImage, NgIf, GenericListComponent, MatButtonModule, MatIconModule
+  imports: [ GenericListComponent, MatButtonModule, MatIconModule
 
   ],
   templateUrl: './movies-list.component.html',
