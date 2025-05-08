@@ -13,3 +13,16 @@ export interface ActorCreationDTO{
 }
 
 
+export interface ActorsAutocompleteDTO{
+    id: number;
+    name: string;
+    character: string;
+    picture: string;
+}
+
+
+
+
+
+
+

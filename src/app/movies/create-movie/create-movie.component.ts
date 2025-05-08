@@ -24,6 +24,16 @@ export class CreateMovieComponent {
 
   ];
 
+  nonSelectedTheaters: MultipleSelectorDTO[] =[
+    {key: 1, description: 'Acropolis'},
+    {key: 2, description: 'Agora'},
+     
+  ]
+
+  selectedTheaters: MultipleSelectorDTO[]=[
+
+  ];
+
 
 
 

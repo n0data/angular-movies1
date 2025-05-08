@@ -10,12 +10,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { InputImgComponent } from '../../shared/components/input-img/input-img.component';
 import { MultipleSelectorComponent } from "../../shared/components/multiple-selector/multiple-selector.component";
 import { MultipleSelectorDTO } from '../../shared/components/multiple-selector/MultipleSelectorDTO';
+import { ActorsAutocompleteComponent } from "../../actors/actors-autocomplete/actors-autocomplete.component";
 
 @Component({
   selector: 'app-movies-form',
   standalone: true,
   imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MatDatepickerModule,
-    InputImgComponent, MultipleSelectorComponent],
+    InputImgComponent, MultipleSelectorComponent, ActorsAutocompleteComponent],
   templateUrl: './movies-form.component.html',
   styleUrl: './movies-form.component.css'
 })
@@ -33,6 +34,12 @@ export class MoviesFormComponent  implements OnInit{
   @Input({required: true})
   nonSelectedGenres!: MultipleSelectorDTO[];
 
+
+  @Input({required: true})
+  selectedTheaters!: MultipleSelectorDTO[];
+
+  @Input({required: true})
+  nonSelectedTheaters!: MultipleSelectorDTO[]; 
 
 
   private formBuilder = inject(FormBuilder);
@@ -83,7 +90,10 @@ export class MoviesFormComponent  implements OnInit{
     const genresIds=this.selectedGenres.map(val => val.key);
     movie.genresIds = genresIds;
 
-    this.postForm.emit(movie);
+    const theatersIds=this.selectedTheaters.map(val => val.key);
+    movie.theatersIds = theatersIds;
+
+    this.postForm.emit(movie); 
 
   }
 
