@@ -27,13 +27,14 @@
         <mat-checkbox [formControl]="form.controls.inTheaters">In Theaters</mat-checkbox>
     </div>
 
-    <div>
+    <div class="buttons-container">
         <button mat-flat-button (click)="clear()" color="warn">Clear</button>
     </div>
+
 </form>
 
+>
 
-
-<app-movies-list [movies]="movies">
+<app-movies-list [movies]="movies" >
 
 </app-movies-list> 

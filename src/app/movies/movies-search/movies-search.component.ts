@@ -10,6 +10,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { GenreDTO } from '../../genres/genres.model';
 import { MoviesListComponent } from "../movies-list/movies-list.component";
 import { MoviesSearchDTO } from './movies-search.models';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -22,15 +24,80 @@ import { MoviesSearchDTO } from './movies-search.models';
 })
 export class MoviesSearchComponent implements OnInit {
 
+
+  activatedRoute = inject(ActivatedRoute);
+  location = inject(Location);
+
+
   ngOnInit(): void {
+
+    this.readValuesFromURL();
+
+    this.filterMovies(this.form.value as MoviesSearchDTO);
     this.form.valueChanges.subscribe(value => {
       
       this.movies = this.moviesOriginal;
       this.filterMovies(value as MoviesSearchDTO);
-      
+      this.writeParametersInTheURL();
       //console.log(value); 
     });
+    
   }
+  
+  readValuesFromURL(){
+      this.activatedRoute.queryParams.subscribe((params: any)=> {
+        let obj: any ={};
+
+        if(params.title){
+          obj.title =params.title;
+        }
+
+        if(params.genreId){
+          obj.genreId = Number(params.genreId);
+        }
+
+        if(params.upcomingRelease){
+          obj.upcomingRelease =params.upcomingRelease;
+        }
+
+        if(params.inTheaters){
+          obj.inTheaters =params.inTheaters;
+        }
+
+        this.form.patchValue(obj);
+
+      })
+  }
+
+  writeParametersInTheURL(){
+    let queryStrings = [];
+
+    const valuesOfForm =this.form.value as MoviesSearchDTO;
+
+    if(valuesOfForm.title){
+      queryStrings.push(`title=${encodeURIComponent(valuesOfForm.title)}`);
+    }
+
+    if(valuesOfForm.genreId !== 0){
+      queryStrings.push(`genreId=${valuesOfForm.genreId}`);
+    }
+
+    if(valuesOfForm.upcomingRelease ){
+      queryStrings.push(`upcomingRelease=${valuesOfForm.upcomingRelease}`);
+    }
+
+    if(valuesOfForm.inTheaters){
+      queryStrings.push(`inTheaters=${valuesOfForm.inTheaters}`);
+    } 
+
+
+
+
+    this.location.replaceState('movies/search', queryStrings.join('&'));
+ 
+  }
+
+      
   filterMovies(values: MoviesSearchDTO){
     if(values.title){
       this.movies= this.movies.filter(movie => movie.title.indexOf(values.title) !== -1);
