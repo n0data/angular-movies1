@@ -22,6 +22,13 @@
     <app-input-img title="Movie's Poster" [imageURL]="model?.poster" 
     (selectedFile)="handleFileSelection($event)"></app-input-img>
 
+    <h4>Select the Genres</h4>
+
+    <app-multiple-selector [selected]="selectedGenres" [nonSelected]="nonSelectedGenres"></app-multiple-selector>
+
+
+
+
     <div class="buttons-container">
         <button [disabled]="form.invalid" mat-flat-button type="submit">Save Changes</button>
         <a routerLink="/" mat-stroked-button>Cancel</a>

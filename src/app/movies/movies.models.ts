@@ -4,11 +4,13 @@ export interface MovieDTO{
     releaseDate: Date;
     trailer: string;
     poster?: string;
+    genresIds?: number[];
 }
 
 export interface MovieCreationDTO{
     title: string;
     releaseDate: Date;
     trailer: string;
-    poster?: File;
+    poster?: File;  
+    genresIds?: number[];
 }
