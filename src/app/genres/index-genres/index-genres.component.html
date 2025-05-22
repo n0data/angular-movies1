@@ -4,3 +4,19 @@
 <button mat-flat-button routerLink="/genres/create">
     <mat-icon>add</mat-icon> Kreiraj
 </button>
+
+<!--
+
+<h4>Are we in  production? {{production}}</h4>
+-->
+<ul>
+
+    @for (genre of genres; track $index){
+        <li>{{genre.name}}</li>
+    }
+
+</ul>
+
+
+
+
