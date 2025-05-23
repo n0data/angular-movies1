@@ -30,7 +30,7 @@ export class GenresFormComponent implements OnInit {
 
   form = this.formBuilder.group({
 
-    name: ['', {validators: [Validators.required, firstLetterShouldBeUppercase()]}] 
+    name: ['', {validators: [Validators.required, firstLetterShouldBeUppercase(), Validators.maxLength(50) ]}] 
 
   });
 
@@ -52,6 +52,10 @@ export class GenresFormComponent implements OnInit {
       return field.getError('firstLetterShouldBeUppercase').message;
     }
 
+    if(field.hasError('maxlength')){
+      return `The field Name must not have more than ${field.getError('maxlength').requiredLength} characters`;
+      
+    }
 
     return "";
   }
