@@ -22,10 +22,27 @@ public getPaginated(pagination: PaginationDTO): Observable<HttpResponse<GenreDTO
 
 } 
 
+
+public getById(id:number): Observable<GenreDTO>{
+  return this.http.get<GenreDTO>(`${this.baseURL}/${id}`);
+
+}
+
+
+
 //kreiranje nove funkcije za kreiranje novog zanra i dodavanja u bazu
 public create(genre: GenreCreationDTO){
   return this.http.post(this.baseURL, genre);
 }
+
+public update(id: number, genre: GenreCreationDTO){
+  return this.http.put(`${this.baseURL}/${id}`, genre);
+}
+
+public delete(id:number){
+  return this.http.delete(`${this.baseURL}/${id}`);
+}
+
 
 
 
